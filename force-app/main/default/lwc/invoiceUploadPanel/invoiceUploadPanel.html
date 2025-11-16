@@ -1,0 +1,51 @@
+<template>
+  <lightning-card title="Invoice OCR" icon-name="utility:scan">
+    <div class="slds-var-p-around_medium">
+      <lightning-file-upload
+        label="Upload Invoice or Receipt"
+        accept="image/*,application/pdf"
+        record-id={recordId}
+        multiple="false"
+        onuploadfinished={handleUploadFinished}
+      ></lightning-file-upload>
+
+      <div class="slds-m-top_medium">
+        <lightning-button
+          label="Process Invoice"
+          variant="brand"
+          onclick={handleProcessInvoice}
+          disabled={disableProcessButton}
+        ></lightning-button>
+      </div>
+
+      <template if:true={isProcessing}>
+        <div class="slds-m-top_medium spinner-container">
+          <lightning-spinner
+            alternative-text="Processing invoice"
+          ></lightning-spinner>
+        </div>
+      </template>
+
+      <template if:true={invoiceResult}>
+        <div class="slds-m-top_large suggestion-section">
+          <h3 class="slds-text-heading_small">Suggested Fields</h3>
+          <div class="slds-m-top_small">
+            <p><strong>Vendor:</strong> {invoiceResult.vendor}</p>
+            <p><strong>Invoice #:</strong> {invoiceResult.invoiceNumber}</p>
+            <p><strong>Date:</strong> {invoiceResult.invoiceDate}</p>
+            <p><strong>Subtotal:</strong> {invoiceResult.subtotal}</p>
+            <p><strong>Tax:</strong> {invoiceResult.tax}</p>
+            <p><strong>Total:</strong> {invoiceResult.total}</p>
+          </div>
+          <div class="slds-m-top_medium">
+            <lightning-button
+              label="Apply Suggestions"
+              variant="success"
+              onclick={handleApplySuggestions}
+            ></lightning-button>
+          </div>
+        </div>
+      </template>
+    </div>
+  </lightning-card>
+</template>
