@@ -1,0 +1,13 @@
+{
+  "name": "invoice-ocr-service",
+  "version": "1.0.0",
+  "description": "Microservice for invoice OCR using Google Cloud Vision",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@google-cloud/vision": "^4.4.0",
+    "express": "^4.19.2"
+  }
+}
